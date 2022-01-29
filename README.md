@@ -1,23 +1,48 @@
 # Python-Twitter-Bot
-Python Twitter Bot 
 
-1.To use Twitter bot,you need to have Python 3 installed on your system.This bot uses tweepy module.You can install tweepy by using pip.To install tweepy, use this command :
+# Installation
+To use this Twitter bot, you need to have Python 3 installed on your system.
 
+This bot also uses the `tweepy` module, which can be installed with pip using this command:
+
+```shell
  $ pip install tweepy
+```
 
-2.Now,you need to create a new application on Twitter. Either you can use your existing account or you can create a new one.Creating a new account for bot  is better so that your original Twitter account does not get banned.To create a new application on Twitter,open this URL in your browser :
- https://apps.twitter.com/
+# Setup Instructions
+
+## Creating a Twitter Application
+
+Twitter requires an Application be creatd through their Developer Portal. This can be through an existing account, or a new one. Creating a new account for your bot is recommended to prevent your personal Twitter account from getting banned.
+
+To create a new application on Twitter, open this URL in your browser, and ffollow the instructions to join the developer program and create an App:
+
+https://developer.twitter.com/apps
+
+## Get Your API Access Credentials
+
+Three bits of info from the Twitter App are required:
+
+* a Consumer Key,
+* a Consumer Secret, 
+* an Access Token, 
+* An Access Token Secret
 
 3.Fill all details required to create the new app.After that ,click on "Key and Access Token" tab under app settings.You will get your app's Consumer Key (API Key , Consumer Secret (API Secret) .You also need to get Access Token and Access Token Secret of your app.We will use these valuse in next step.You need to generate Access Token for first time.
 
+## Add your credentials to the App
 
-4.Edit credentials.py and copy-paste  all your details carefully.
+Modify `credentials.py`, and copy/paste your app's details into the proper fields.
 
+## Test Your Credentials (Optional)
 
-5.Now,you can run  twitterbot_text.py file to run bot which will tweet The Zen of Python texts by using this command :
+A quick test of your app is to run `twitterbot_text.py`. This is a simple bot that will tweet each line of "The Zen of Python" as its own tweet.
 
+Run this bot using this command:
 
+```shell
  $ python twitterbot_text.py 
+```
  
  ![Twitter Text Bot Screenshot](https://github.com/gauravssnl/Python-Twitter-Bot/blob/master/twitter%20text%20bot.png)
 
