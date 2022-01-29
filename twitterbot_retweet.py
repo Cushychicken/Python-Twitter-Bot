@@ -3,38 +3,44 @@ from time import sleep
 from credentials import *
 from config import QUERY, FOLLOW, LIKE, SLEEP_TIME
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
-api = tweepy.API(auth)
+client = tweepy.Client(
+    consumer_key=consumer_key, consumer_secret=consumer_secret,
+    access_token=access_token, access_token_secret=access_token_secret,
+    bearer_token=bearer_token
+)
 
-print("Twitter bot which retweets,like tweets and follow users")
+print("Retweet/Like/Follow Bot")
+print()
 print("Bot Settings")
 print("Like Tweets :", LIKE)
 print("Follow users :", FOLLOW)
+print()
 
-for tweet in tweepy.Cursor(api.search, q=QUERY).items():
-    try:
-        print('\nTweet by: @' + tweet.user.screen_name)
+response = client.search_recent_tweets(
+        QUERY, 
+        max_results=100,
+        expansions=["attachments.media_keys", "author_id"]
+)
 
-        tweet.retweet()
-        print('Retweeted the tweet')
+# In this case, the data field of the Response returned is a list of Tweet
+# objects
+tweets = response.data
 
-        # Favorite the tweet
-        if LIKE:
-            tweet.favorite()
-            print('Favorited the tweet')
+# You can then access those objects in the includes Response field
+includes = response.includes
+users = includes["users"]
 
-        # Follow the user who tweeted
-        #check that bot is not already following the user
-        if FOLLOW:
-            if not tweet.user.following:
-                tweet.user.follow()
-                print('Followed the user')
+# An efficient way of matching expanded objects to each data object is to
+# create a dictionary of each type of expanded object, with IDs as keys
+users = {user["id"]: user for user in users}
+for tweet in tweets:
+    client.retweet(tweet.id)
+    print("Retweeted " + str(tweet.id) + " by " + users[tweet.author_id].username)
+    if LIKE:
+        client.like(tweet.id)
 
-        sleep(SLEEP_TIME)
+    if FOLLOW:
+        client.follow(tweet.author_id)
 
-    except tweepy.TweepError as e:
-        print(e.reason)
+    time.sleep(1)
 
-    except StopIteration:
-        break
