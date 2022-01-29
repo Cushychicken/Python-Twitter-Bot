@@ -18,7 +18,7 @@ print()
 
 response = client.search_recent_tweets(
         QUERY, 
-        max_results=100,
+        max_results=20,
         expansions=["attachments.media_keys", "author_id"]
 )
 
@@ -34,13 +34,17 @@ users = includes["users"]
 # create a dictionary of each type of expanded object, with IDs as keys
 users = {user["id"]: user for user in users}
 for tweet in tweets:
-    client.retweet(tweet.id)
-    print("Retweeted " + str(tweet.id) + " by " + users[tweet.author_id].username)
-    if LIKE:
-        client.like(tweet.id)
+    if users[tweet.author_id].username != 'RTLjobs':
+        client.retweet(tweet.id)
+        print("Retweeted " + str(tweet.id) + " by " + users[tweet.author_id].username)
+        if LIKE:
+            client.like(tweet.id)
 
-    if FOLLOW:
-        client.follow(tweet.author_id)
+        if FOLLOW :
+            try:
+                client.follow(tweet.author_id)
+            except:
+                pass
 
-    time.sleep(1)
+        sleep(1)
 
