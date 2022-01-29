@@ -8,7 +8,7 @@ QUERY = '#FPGA'
 LIKE = True 
 
 # Twitter bot setting for following user who tweeted
-FOLLOW = False
+FOLLOW = True
 
 # Twitter bot sleep time setting, in seconds. 
 # SLEEP_TIME is set to 300 seconds (5 minutes) by default.
