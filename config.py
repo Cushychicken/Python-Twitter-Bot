@@ -14,4 +14,4 @@ FOLLOW = True
 # SLEEP_TIME is set to 300 seconds (5 minutes) by default.
 # A larger delay is recommended for politeness/ban prevention. 
 
-SLEEP_TIME = 300
+SLEEP_TIME = 900
