@@ -5,7 +5,7 @@
 QUERY = '#FPGA'
 
 # Twitter bot setting for liking Tweets
-LIKE = True 
+LIKE = False 
 
 # Twitter bot setting for following user who tweeted
 FOLLOW = True
